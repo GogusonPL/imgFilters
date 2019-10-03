@@ -4,74 +4,78 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImgFilters.View"
-        
+        xmlns:vm="clr-namespace:ImgFilters.ViewModel"
         mc:Ignorable="d"
         Title="ImgFiltersWindow" Height="450" Width="800"
         MinHeight="450" MinWidth="800"
         MaxHeight="1080" MaxWidth="1920">
+    <Window.Resources>
+        <vm:ImgFiltersVM x:Key="vm" />
+    </Window.Resources>
 
-    <Grid>
+    <Grid DataContext="{StaticResource vm}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.Column="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                
-
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Button x:Name="SelectImgButton"
+                    Command="{Binding Source={StaticResource vm}, Path=SelectPhotoCommand}"
                     Grid.ColumnSpan="2"
-                    Content="Select photo"/>
+                    Content="Select photo" />
             <ToggleButton x:Name="GaussFilterButton"
-                      Grid.Row="1"
-                      Grid.Column="0"
-                      Content="Gauss"/>
+                          Command="{Binding Source={StaticResource vm}, Path=GaussCommand}"
+                          Grid.Row="1"
+                          Grid.Column="0"
+                          Content="Gauss" />
             <ToggleButton x:Name="BTresholdingFilterButton"
-                      Grid.Row="1"
-                      Grid.Column="1"
-                      Content="Bradley"/>
+                          Command="{Binding Source={StaticResource vm}, Path=BradleyCommand}"
+                          Grid.Row="1"
+                          Grid.Column="1"
+                          Content="Bradley" />
         </Grid>
-        
+
         <Image x:Name="UploadedImage"
                Margin="5"
                Grid.Column="0"
                Grid.RowSpan="6"
-               Grid.ColumnSpan="2">
-
+               Grid.ColumnSpan="2"
+               Source="{Binding UploadedPhoto}">
         </Image>
         <ToggleButton x:Name="OriginalImgButton"
+                      Command="{Binding Source={StaticResource vm}, Path=OriginalPhotoCommand}"
                       Margin="10"
                       Grid.Column="0"
                       Grid.Row="6"
                       Grid.ColumnSpan="1"
-                      Content="Original photo"/>
-        
+                      Content="Original photo" />
+
         <ToggleButton x:Name="AfterImgButton"
+                      Command="{Binding Source={StaticResource vm}, Path=AfterPhotoCommand}"
                       Margin="10"
                       Grid.Column="1"
                       Grid.Row="6"
                       Grid.ColumnSpan="1"
-                      Content="After photo"/>
-
+                      Content="After photo" />
     </Grid>
 </Window>

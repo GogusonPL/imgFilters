@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Commands\AfterPhotoCommand.cs" />
+    <Compile Include="ViewModel\Commands\BradleyCommand.cs" />
+    <Compile Include="ViewModel\Commands\GaussCommand.cs" />
+    <Compile Include="ViewModel\Commands\OriginalPhotoCommand.cs" />
+    <Compile Include="ViewModel\Commands\SelectPhotoCommand.cs" />
     <Compile Include="ViewModel\ImgFiltersVM.cs" />
     <Compile Include="View\ImgFiltersWindow.xaml.cs">
       <DependentUpon>ImgFiltersWindow.xaml</DependentUpon>
@@ -96,7 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="ViewModel\Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

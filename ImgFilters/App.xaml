@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:ImgFilters"
              StartupUri="View/ImgFiltersWindow.xaml">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>
