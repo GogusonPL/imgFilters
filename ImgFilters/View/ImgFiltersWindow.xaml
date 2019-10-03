@@ -4,9 +4,74 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImgFilters.View"
-        mc:Ignorable="d"
-        Title="ImgFiltersWindow" Height="450" Width="800">
-    <Grid>
         
+        mc:Ignorable="d"
+        Title="ImgFiltersWindow" Height="450" Width="800"
+        MinHeight="450" MinWidth="800"
+        MaxHeight="1080" MaxWidth="1920">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                
+
+            </Grid.RowDefinitions>
+            <Button x:Name="SelectImgButton"
+                    Grid.ColumnSpan="2"
+                    Content="Select photo"/>
+            <ToggleButton x:Name="GaussFilterButton"
+                      Grid.Row="1"
+                      Grid.Column="0"
+                      Content="Gauss"/>
+            <ToggleButton x:Name="BTresholdingFilterButton"
+                      Grid.Row="1"
+                      Grid.Column="1"
+                      Content="Bradley"/>
+        </Grid>
+        
+        <Image x:Name="UploadedImage"
+               Margin="5"
+               Grid.Column="0"
+               Grid.RowSpan="6"
+               Grid.ColumnSpan="2">
+
+        </Image>
+        <ToggleButton x:Name="OriginalImgButton"
+                      Margin="10"
+                      Grid.Column="0"
+                      Grid.Row="6"
+                      Grid.ColumnSpan="1"
+                      Content="Original photo"/>
+        
+        <ToggleButton x:Name="AfterImgButton"
+                      Margin="10"
+                      Grid.Column="1"
+                      Grid.Row="6"
+                      Grid.ColumnSpan="1"
+                      Content="After photo"/>
+
     </Grid>
 </Window>

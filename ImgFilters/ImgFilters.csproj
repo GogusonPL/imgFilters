@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\ImgFiltersVM.cs" />
     <Compile Include="View\ImgFiltersWindow.xaml.cs">
       <DependentUpon>ImgFiltersWindow.xaml</DependentUpon>
     </Compile>
