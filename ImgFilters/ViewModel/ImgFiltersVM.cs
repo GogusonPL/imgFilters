@@ -23,6 +23,27 @@ namespace ImgFilters.ViewModel
             }
         }
 
+        private BitmapImage currentPhoto;
+
+        public BitmapImage CurrentPhoto
+        {
+            get { return currentPhoto; }
+            set { currentPhoto = value;
+                OnPropertyChanged("CurrentPhoto");
+            }
+        }
+
+        private BitmapImage afterPhoto;
+
+        public BitmapImage AfterPhoto
+        {
+            get { return afterPhoto; }
+            set { afterPhoto = value;
+                OnPropertyChanged("AfterPhoto");
+            }
+        }
+
+
         public AfterPhotoCommand AfterPhotoCommand { get; set; }
         public BradleyCommand BradleyCommand { get; set; }
         public GaussCommand GaussCommand { get; set; }
@@ -32,6 +53,7 @@ namespace ImgFilters.ViewModel
         public ImgFiltersVM()
         {
             InitializeCommands();
+           
         }
 
         private void InitializeCommands()
@@ -51,6 +73,7 @@ namespace ImgFilters.ViewModel
             {
                 string filePath = dialog_window.FileName;
                 UploadedPhoto = new BitmapImage(new Uri(filePath));
+                
             }
         }
 
