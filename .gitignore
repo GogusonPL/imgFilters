@@ -190,3 +190,5 @@ git_stats/*
 StyleCop.Cache
 bin
 obj
+/.vs
+/ImgFilters/.vs/ImgFilters/v16/Server/sqlite3
