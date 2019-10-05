@@ -54,7 +54,11 @@
                           Grid.Column="1"
                           Content="Bradley" />
         </Grid>
-
+        <Grid Grid.Row="1"
+              Grid.Column="3"
+              Grid.RowSpan="6">
+            
+        </Grid>
         <Image x:Name="UploadedImage"
                Margin="5"
                Grid.Column="0"

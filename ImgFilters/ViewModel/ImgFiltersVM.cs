@@ -65,6 +65,13 @@ namespace ImgFilters.ViewModel
         public OriginalPhotoCommand OriginalPhotoCommand { get; set; }
         public SelectPhotoCommand SelectPhotoCommand { get; set; }
 
+        // Bradley filter params
+        public float redParameter { get; set; }
+        public float greenParameter { get; set; }
+        public float blueParameter { get; set; }
+        public float precisionParameter { get; set; }
+        public float adjustmentParameter { get; set; }
+
         public ImgFiltersVM()
         {
             InitializeCommands();
@@ -82,7 +89,7 @@ namespace ImgFilters.ViewModel
         public void SelectImage()
         {
             OpenFileDialog dialog_window = new OpenFileDialog();
-            dialog_window.Filter = "Image files (*.png; *.jpg;)|*.png;*.jpg;*.jpeg|All files(*.*)|*.*";
+            dialog_window.Filter = "Image files (*.png; *.jpg;)|*.png;*.jpg;*.jpeg|All files(*.*)|*.*"; //TODO: Fix this
             if (dialog_window.ShowDialog() == true)
             {
                 string filePath = dialog_window.FileName;

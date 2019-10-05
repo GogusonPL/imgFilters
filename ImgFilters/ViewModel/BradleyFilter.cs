@@ -5,7 +5,7 @@ namespace ImgFilters.ViewModel
     public class BradleyFilter
     {
       
-        public static BitmapSource CreateBradley(BitmapImage image, int precision, float adjustment)
+        public static BitmapSource CreateBradley(BitmapImage image, int precision, float adjustment,float rParam, float gParam, float bParam)
         {
             int height = image.PixelHeight,
                 width = image.PixelWidth;
@@ -23,7 +23,7 @@ namespace ImgFilters.ViewModel
                 int sum = 0;
                 for (int j = 0; j < width; j++)
                 {
-                    sum += GetGrayScale(stride, pixels, i, j);
+                    sum += GetGrayScale(stride, pixels, i, j, rParam, gParam, bParam);
                     if (i == 0)
                     {
                         integralImage[i, j] = sum;
@@ -52,7 +52,7 @@ namespace ImgFilters.ViewModel
 
                     int sum = integralImage[x2, y2] - integralImage[x2, y1 - 1] - integralImage[x1 - 1, y2] + integralImage[x1 - 1, y1 - 1];
 
-                    if ((GetGrayScale(stride, pixels, i, j) * count) <= (sum * (100 - adjustment) / 100))
+                    if ((GetGrayScale(stride, pixels, i, j, rParam, gParam, bParam) * count) <= (sum * (100 - adjustment) / 100))
                     {
                         int index = i * stride + 4 * j;
 
@@ -70,7 +70,9 @@ namespace ImgFilters.ViewModel
                     }
                 }
             }
-            var test = BitmapImage.Create(
+             
+
+            return  BitmapImage.Create(
                 image.PixelWidth,
                 image.PixelHeight,
                 image.DpiX,
@@ -79,11 +81,9 @@ namespace ImgFilters.ViewModel
                 image.Palette,
                 pixels,
                 stride);
-
-            return test;
         }
 
-        private static int GetGrayScale(int stride, byte[] pixels, int pixel_height, int pixel_width)
+        private static int GetGrayScale(int stride, byte[] pixels, int pixel_height, int pixel_width,float rParam, float gParam, float bParam)
         {
             int index = pixel_height * stride + 4 * pixel_width;
 
@@ -92,7 +92,7 @@ namespace ImgFilters.ViewModel
             byte blue = pixels[index + 2];
 
             var grayScale = 0.3f * red + 0.6f * green + 0.11f * blue;
-
+            //var grayScale = rParam * red + gParam * green + bParam * blue;
             return (int)grayScale;
         }
     }
