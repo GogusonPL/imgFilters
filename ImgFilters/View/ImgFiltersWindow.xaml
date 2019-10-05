@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImgFilters.View"
         xmlns:vm="clr-namespace:ImgFilters.ViewModel"
+        xmlns:userControllers="clr-namespace:ImgFilters.View.UserControllers"
         mc:Ignorable="d"
         Title="ImgFiltersWindow" Height="450" Width="800"
         MinHeight="450" MinWidth="800"
@@ -57,6 +58,7 @@
         <Grid Grid.Row="1"
               Grid.Column="3"
               Grid.RowSpan="6">
+            <userControllers:BradleyUC x:Name="BradleyFilterParams" Visibility="Visible"></userControllers:BradleyUC>
             
         </Grid>
         <Image x:Name="UploadedImage"
@@ -66,7 +68,7 @@
                Grid.ColumnSpan="2"
                Source="{Binding Path=Test}">
         </Image>
-        <ToggleButton x:Name="OriginalImgButton"
+        <Button x:Name="OriginalImgButton"
                       Command="{Binding Source={StaticResource vm}, Path=OriginalPhotoCommand}"
                       Margin="10"
                       Grid.Column="0"
@@ -74,7 +76,7 @@
                       Grid.ColumnSpan="1"
                       Content="Original photo" />
 
-        <ToggleButton x:Name="AfterImgButton"
+        <Button x:Name="AfterImgButton"
                       Command="{Binding Source={StaticResource vm}, Path=AfterPhotoCommand}"
                       Margin="10"
                       Grid.Column="1"

@@ -21,8 +21,12 @@ namespace ImgFilters.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            
-            VM.Test = ImgManager.BitmapSourceToByteArray(BradleyFilter.CreateBradley(VM.UploadedPhoto, VM.UploadedPhoto.PixelWidth / 8, 0.15f));
+
+            VM.Test = ImgManager.BitmapSourceToByteArray(BradleyFilter.CreateBradley(VM.UploadedPhoto,
+                                                                                     VM.UploadedPhoto.PixelWidth / VM.PrecisionParameter,
+                                                                                     VM.AdjustmentParameter,
+                                                                                     VM.RedParameter, VM.GreenParameter,
+                                                                                     VM.BlueParameter));
             
         }
     }
