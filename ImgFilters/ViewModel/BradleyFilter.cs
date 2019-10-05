@@ -1,30 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Media.Imaging;
 
 namespace ImgFilters.ViewModel
 {
     public class BradleyFilter
     {
-
-        //public byte[,] IntegralImage { get; set; }
-
-        //public byte InputImage { get; set; }
-
-
-        public static byte[,] CreateBinaryImage(byte[,] inputImage, int WIDTH, int HEIGHT, int precision, float adjustment)
+      
+        public static BitmapSource CreateBradley(BitmapImage image, int precision, float adjustment)
         {
-            byte[,] binaryImage = new byte[WIDTH, HEIGHT];
-            int[,] integralImage = new int[WIDTH, HEIGHT];
+            int height = image.PixelHeight,
+                width = image.PixelWidth;
 
-            for (int i = 0; i < WIDTH; i++)
+            int[,] integralImage = new int[height, width];
+
+            int stride = image.PixelWidth * 4;
+            int size = image.PixelHeight * stride;
+            byte[] pixels = new byte[size];
+
+            image.CopyPixels(pixels, stride, 0);
+
+            for (int i = 0; i < height; i++)
             {
                 int sum = 0;
-                for (int j = 0; j < HEIGHT; j++)
+                for (int j = 0; j < width; j++)
                 {
-                    sum += inputImage[i, j];
+                    sum += GetGrayScale(stride, pixels, i, j);
                     if (i == 0)
                     {
                         integralImage[i, j] = sum;
@@ -33,40 +32,68 @@ namespace ImgFilters.ViewModel
                     {
                         integralImage[i, j] = integralImage[i - 1, j] + sum;
                     }
-
-
                 }
             }
 
-            for (int i = 0; i < WIDTH; i++)
+            for (int i = 0; i < height; i++)
             {
-                for (int j = 0; j < HEIGHT; j++)
+                for (int j = 0; j < width; j++)
                 {
-                    int x1 = i - precision / 2;
-                    int x2 = i + precision / 2;
-                    int y1 = j - precision / 2;
-                    int y2 = j + precision / 2;
+                    var x1 = i - precision / 2;
+                    if (x1 <= 0) x1 = 1;
+                    var x2 = i + precision / 2;
+                    if (x2 >= height) x2 = height - 1;
+                    var y1 = j - precision / 2;
+                    if (y1 <= 0) y1 = 1;
+                    var y2 = j + precision / 2;
+                    if (y2 >= width) y2 = width - 1;
 
                     int count = (x2 - x1) * (y2 - y1);
 
                     int sum = integralImage[x2, y2] - integralImage[x2, y1 - 1] - integralImage[x1 - 1, y2] + integralImage[x1 - 1, y1 - 1];
 
-                    if((inputImage[i,j]*count) <= (sum*(100 - adjustment) / 100))
+                    if ((GetGrayScale(stride, pixels, i, j) * count) <= (sum * (100 - adjustment) / 100))
                     {
-                        binaryImage[i, j] = 0;
+                        int index = i * stride + 4 * j;
+
+                        pixels[index] = 0;
+                        pixels[index + 1] = 0;
+                        pixels[index + 2] = 0;
                     }
                     else
                     {
-                        binaryImage[i, j] = 255;
+                        int index = i * stride + 4 * j;
+
+                        pixels[index] = 255;
+                        pixels[index + 1] = 255;
+                        pixels[index + 2] = 255;
                     }
                 }
             }
+            var test = BitmapImage.Create(
+                image.PixelWidth,
+                image.PixelHeight,
+                image.DpiX,
+                image.DpiY,
+                image.Format,
+                image.Palette,
+                pixels,
+                stride);
 
-            return binaryImage;
+            return test;
         }
 
+        private static int GetGrayScale(int stride, byte[] pixels, int pixel_height, int pixel_width)
+        {
+            int index = pixel_height * stride + 4 * pixel_width;
 
+            byte red = pixels[index];
+            byte green = pixels[index + 1];
+            byte blue = pixels[index + 2];
 
+            var grayScale = 0.3f * red + 0.6f * green + 0.11f * blue;
 
+            return (int)grayScale;
+        }
     }
 }

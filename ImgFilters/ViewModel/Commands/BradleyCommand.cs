@@ -16,11 +16,14 @@ namespace ImgFilters.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            return false;
+            return true;
         }
 
         public void Execute(object parameter)
         {
+            
+            VM.Test = ImgManager.BitmapSourceToByteArray(BradleyFilter.CreateBradley(VM.UploadedPhoto, VM.UploadedPhoto.PixelWidth / 8, 0.15f));
+            
         }
     }
 }
