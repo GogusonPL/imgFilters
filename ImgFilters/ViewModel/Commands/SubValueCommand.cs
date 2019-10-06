@@ -11,6 +11,7 @@ namespace ImgFilters.ViewModel.Commands
     {
         public event EventHandler CanExecuteChanged;
         public ImgFiltersVM VM { get; set; }
+        
         public SubValueCommand(ImgFiltersVM vm)
         {
             VM = vm;
@@ -22,7 +23,18 @@ namespace ImgFilters.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            
+            if (parameter is int)
+            {
+                var param = (int)parameter;
+                param -= 1;
+            }
+            else
+            {
+                var param = (float)parameter;
+                param -= 0.1f;
+                
+            }
         }
     }
 }

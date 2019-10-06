@@ -91,8 +91,8 @@ namespace ImgFilters.ViewModel
             byte green = pixels[index + 1];
             byte blue = pixels[index + 2];
 
-            var grayScale = 0.3f * red + 0.6f * green + 0.11f * blue;
-            //var grayScale = rParam * red + gParam * green + bParam * blue;
+            //var grayScale = 0.3f * red + 0.6f * green + 0.11f * blue;
+            var grayScale = rParam * red + gParam * green + bParam * blue;
             return (int)grayScale;
         }
     }

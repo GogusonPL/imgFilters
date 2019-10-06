@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace ImgFilters.ViewModel
@@ -11,21 +12,32 @@ namespace ImgFilters.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private BitmapImage uploadedPhoto;
+        private Visibility bradleyUCVisibility;
 
-        public BitmapImage UploadedPhoto
+        public Visibility BradleyUCVisibility
         {
-            get { return uploadedPhoto; }
-            set
-            {
-                uploadedPhoto = value;
-                OnPropertyChanged("UploadedPhoto");
+            get { return bradleyUCVisibility; }
+            set { bradleyUCVisibility = value;
+                OnPropertyChanged("BradleyUCVisibility");
             }
         }
 
-        private BitmapImage currentPhoto;
 
-        public BitmapImage CurrentPhoto
+        private BitmapImage originalPhoto;
+
+        public BitmapImage OriginalPhoto
+        {
+            get { return originalPhoto; }
+            set
+            {
+                originalPhoto = value;
+                OnPropertyChanged("OriginalPhoto");
+            }
+        }
+
+        private byte[] currentPhoto;
+
+        public byte[] CurrentPhoto
         {
             get { return currentPhoto; }
             set
@@ -35,21 +47,10 @@ namespace ImgFilters.ViewModel
             }
         }
 
-        private byte[] test;
 
-        public byte[] Test
-        {
-            get { return test; }
-            set
-            {
-                test = value;
-                OnPropertyChanged("Test");
-            }
-        }
+        private byte[] afterPhoto;
 
-        private BitmapImage afterPhoto;
-
-        public BitmapImage AfterPhoto
+        public byte[] AfterPhoto
         {
             get { return afterPhoto; }
             set
@@ -67,6 +68,7 @@ namespace ImgFilters.ViewModel
         public AddValueCommand AddValueCommand { get; set; }
         public SubValueCommand SubValueCommand { get; set; }
         public ResetValueCommand ResetValueCommand { get; set; }
+        public ApplyBradleyCommand ApplyBradleyCommand { get; set; }
 
         // Bradley filter params
         private float redParameter;
@@ -76,7 +78,7 @@ namespace ImgFilters.ViewModel
             get { return redParameter; }
             set {
 
-                if (value >= 0.1f && value <= 1)
+                if (value >= 0.1 && value <= 1)
                 {
                     redParameter = value;
                     OnPropertyChanged("RedParameter");
@@ -101,7 +103,7 @@ namespace ImgFilters.ViewModel
         {
             get { return greenParameter; }
             set {
-                if (value >= 0.1f && value <= 1)
+                if (value >= 0.1 && value <= 1)
                 {
                     greenParameter = value;
                     OnPropertyChanged("GreenParameter");
@@ -126,9 +128,9 @@ namespace ImgFilters.ViewModel
             get { return blueParameter; }
             set
             {
-                if (value >= 0.1f && value <= 1)
+                if (value >= 0.1 && value <= 1)
                 {
-                    greenParameter = value;
+                    blueParameter = value;
                     OnPropertyChanged("BlueParameter");
                 }
                 else
@@ -176,7 +178,7 @@ namespace ImgFilters.ViewModel
             get { return adjustmentParameter; }
             set
             {
-                if (value >= 0.1f && value <= 1)
+                if (value >= 0.1 && value <= 1)
                 {
                     adjustmentParameter = value;
                     OnPropertyChanged("AdjustmentParameter");
@@ -199,6 +201,7 @@ namespace ImgFilters.ViewModel
         {
             InitializeCommands();
             InitializeDefaultParams();
+            BradleyUCVisibility = Visibility.Hidden;
 
         }
 
@@ -221,6 +224,7 @@ namespace ImgFilters.ViewModel
             AddValueCommand = new AddValueCommand(this);
             SubValueCommand = new SubValueCommand(this);
             ResetValueCommand = new ResetValueCommand(this);
+            ApplyBradleyCommand = new ApplyBradleyCommand(this);
 
         }
 
@@ -231,7 +235,9 @@ namespace ImgFilters.ViewModel
             if (dialog_window.ShowDialog() == true)
             {
                 string filePath = dialog_window.FileName;
-                UploadedPhoto = new BitmapImage(new Uri(filePath));
+                OriginalPhoto = new BitmapImage(new Uri(filePath));
+                var temp = new BitmapImage(new Uri(filePath));
+                CurrentPhoto = ImgManager.BitmapSourceToByteArray(temp);
             }
         }
 

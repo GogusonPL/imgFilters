@@ -23,6 +23,12 @@ namespace ImgFilters.ViewModel.Commands
         public void Execute(object parameter)
         {
             VM.SelectImage();
+            VM.AfterPhotoCommand.IsLocked = true;
+            VM.AfterPhotoCommand.OnCanExecuteChanged();
+            VM.OriginalPhotoCommand.IsLocked = true;
+            VM.OriginalPhotoCommand.OnCanExecuteChanged();
+
+
         }
     }
 }

@@ -44,29 +44,32 @@
                     Command="{Binding Source={StaticResource vm}, Path=SelectPhotoCommand}"
                     Grid.ColumnSpan="2"
                     Content="Select photo" />
-            <ToggleButton x:Name="GaussFilterButton"
+            <Button x:Name="GaussFilterButton"
                           Command="{Binding Source={StaticResource vm}, Path=GaussCommand}"
                           Grid.Row="1"
                           Grid.Column="0"
                           Content="Gauss" />
-            <ToggleButton x:Name="BTresholdingFilterButton"
+            <Button x:Name="BTresholdingFilterButton"
                           Command="{Binding Source={StaticResource vm}, Path=BradleyCommand}"
+
                           Grid.Row="1"
                           Grid.Column="1"
                           Content="Bradley" />
         </Grid>
         <Grid Grid.Row="1"
+              x:Name="ParamsGrid"
               Grid.Column="3"
               Grid.RowSpan="6">
-            <userControllers:BradleyUC x:Name="BradleyFilterParams" Visibility="Visible"></userControllers:BradleyUC>
+            <userControllers:BradleyUC x:Name="BradleyFilterParams"
+                                       Visibility="{Binding BradleyUCVisibility, UpdateSourceTrigger=PropertyChanged}"></userControllers:BradleyUC>
             
         </Grid>
-        <Image x:Name="UploadedImage"
+        <Image x:Name="OriginalImage"
                Margin="5"
                Grid.Column="0"
                Grid.RowSpan="6"
                Grid.ColumnSpan="2"
-               Source="{Binding Path=Test}">
+               Source="{Binding Path=CurrentPhoto}">
         </Image>
         <Button x:Name="OriginalImgButton"
                       Command="{Binding Source={StaticResource vm}, Path=OriginalPhotoCommand}"

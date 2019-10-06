@@ -58,6 +58,7 @@
     <Compile Include="ViewModel\BradleyFilter.cs" />
     <Compile Include="ViewModel\Commands\AddValueCommand.cs" />
     <Compile Include="ViewModel\Commands\AfterPhotoCommand.cs" />
+    <Compile Include="ViewModel\Commands\ApplyBradleyCommand.cs" />
     <Compile Include="ViewModel\Commands\BradleyCommand.cs" />
     <Compile Include="ViewModel\Commands\GaussCommand.cs" />
     <Compile Include="ViewModel\Commands\OriginalPhotoCommand.cs" />

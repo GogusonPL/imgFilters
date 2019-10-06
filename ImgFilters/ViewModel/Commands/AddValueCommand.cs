@@ -22,7 +22,16 @@ namespace ImgFilters.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            if(parameter is int)
+            {
+                var param = (int)parameter;
+                param += 1;
+            }
+            else
+            {
+                var param = (float)parameter;
+                param += 0.1f;
+            }
         }
     }
 }

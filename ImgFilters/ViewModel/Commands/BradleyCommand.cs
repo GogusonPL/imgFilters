@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ImgFilters.View;
+using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ImgFilters.ViewModel.Commands
@@ -6,28 +8,39 @@ namespace ImgFilters.ViewModel.Commands
     public class BradleyCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-
+        public bool IsLocked { get; set; }
         public ImgFiltersVM VM { get; set; }
 
         public BradleyCommand(ImgFiltersVM vm)
         {
             VM = vm;
+            IsLocked = false;
+            VM.BradleyUCVisibility = Visibility.Hidden;
         }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            if (IsLocked) return false;
+            else return true;
         }
 
         public void Execute(object parameter)
         {
 
-            VM.Test = ImgManager.BitmapSourceToByteArray(BradleyFilter.CreateBradley(VM.UploadedPhoto,
-                                                                                     VM.UploadedPhoto.PixelWidth / VM.PrecisionParameter,
-                                                                                     VM.AdjustmentParameter,
-                                                                                     VM.RedParameter, VM.GreenParameter,
-                                                                                     VM.BlueParameter));
-            
+            IsLocked = true;
+            VM.GaussCommand.IsLocked = false;
+            //TODO: gaus visibility
+            VM.BradleyUCVisibility = Visibility.Visible;
+            OnCanExecuteChanged();
+            VM.GaussCommand.OnCanExecuteChanged();
+
+        }
+        public void OnCanExecuteChanged()
+        {
+            if (CanExecuteChanged != null)
+            {
+                CanExecuteChanged(this, new EventArgs());
+            }
         }
     }
 }

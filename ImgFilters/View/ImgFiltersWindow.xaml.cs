@@ -10,6 +10,9 @@ namespace ImgFilters.View
         public ImgFiltersWindow()
         {
             InitializeComponent();
+            
         }
+
+        
     }
 }
