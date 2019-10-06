@@ -7,12 +7,11 @@ using System.Windows.Input;
 
 namespace ImgFilters.ViewModel.Commands
 {
-    public class ApplyBradleyCommand : ICommand
+    public class TestCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        public bool IsLocked { get; set; }
         public ImgFiltersVM VM { get; set; }
-        public ApplyBradleyCommand(ImgFiltersVM vm)
+        public TestCommand(ImgFiltersVM vm)
         {
             VM = vm;
         }
@@ -29,7 +28,12 @@ namespace ImgFilters.ViewModel.Commands
                                                                                      VM.RedParameter, VM.GreenParameter,
                                                                                      VM.BlueParameter));
             VM.CurrentPhoto = VM.AfterPhoto;
-            
+
+            VM.OriginalPhotoCommand.IsLocked = false;
+            VM.OriginalPhotoCommand.OnCanExecuteChanged();
+            VM.AfterPhotoCommand.IsLocked = true;
+            VM.AfterPhotoCommand.OnCanExecuteChanged();
+
         }
     }
 }

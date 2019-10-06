@@ -34,6 +34,8 @@ namespace ImgFilters.ViewModel.Commands
             OnCanExecuteChanged();
             VM.GaussCommand.OnCanExecuteChanged();
 
+            
+
         }
         public void OnCanExecuteChanged()
         {

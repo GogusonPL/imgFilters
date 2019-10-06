@@ -7,10 +7,13 @@ using System.Windows.Media.Imaging;
 
 namespace ImgFilters.ViewModel
 {
-    public class ImgFiltersVM : INotifyPropertyChanged
+    public sealed class ImgFiltersVM : INotifyPropertyChanged
 
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+
+
 
         private Visibility bradleyUCVisibility;
 
@@ -69,6 +72,7 @@ namespace ImgFilters.ViewModel
         public SubValueCommand SubValueCommand { get; set; }
         public ResetValueCommand ResetValueCommand { get; set; }
         public ApplyBradleyCommand ApplyBradleyCommand { get; set; }
+        public TestCommand TestCommand { get; set; }
 
         // Bradley filter params
         private float redParameter;
@@ -225,6 +229,7 @@ namespace ImgFilters.ViewModel
             SubValueCommand = new SubValueCommand(this);
             ResetValueCommand = new ResetValueCommand(this);
             ApplyBradleyCommand = new ApplyBradleyCommand(this);
+            TestCommand = new TestCommand(this);
 
         }
 

@@ -22,10 +22,7 @@ namespace ImgFilters.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            if (parameter != null)
-            {
-                
-            }
+            
         }
     }
 }

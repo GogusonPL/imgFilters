@@ -86,5 +86,12 @@
                       Grid.Row="6"
                       Grid.ColumnSpan="1"
                       Content="After photo" />
+        <Button x:Name="TestImgButton"
+                      Command="{Binding Source={StaticResource vm}, Path=TestCommand}"
+                      Margin="10"
+                      Grid.Column="1"
+                      Grid.Row="7"
+                      Grid.ColumnSpan="1"
+                      Content="Test" />
     </Grid>
 </Window>
