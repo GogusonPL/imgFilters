@@ -26,7 +26,7 @@ namespace ImgFilters.ViewModel.Commands
         {
             IsLocked = true;
             VM.BradleyCommand.IsLocked = false;
-            VM.BradleyUCVisibility = Visibility.Hidden;
+            VM.Bradley = Visibility.Hidden;
             //TODO: gaus visible
             OnCanExecuteChanged();
             VM.BradleyCommand.OnCanExecuteChanged();

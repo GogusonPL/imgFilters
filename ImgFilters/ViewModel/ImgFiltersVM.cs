@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 
 namespace ImgFilters.ViewModel
 {
-    public sealed class ImgFiltersVM : INotifyPropertyChanged
+    public class ImgFiltersVM : INotifyPropertyChanged
 
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -15,13 +15,13 @@ namespace ImgFilters.ViewModel
 
 
 
-        private Visibility bradleyUCVisibility;
+        private Visibility bradley;
 
-        public Visibility BradleyUCVisibility
+        public Visibility Bradley
         {
-            get { return bradleyUCVisibility; }
-            set { bradleyUCVisibility = value;
-                OnPropertyChanged("BradleyUCVisibility");
+            get { return bradley; }
+            set { bradley = value;
+                OnPropertyChanged("Bradley");
             }
         }
 
@@ -205,7 +205,7 @@ namespace ImgFilters.ViewModel
         {
             InitializeCommands();
             InitializeDefaultParams();
-            BradleyUCVisibility = Visibility.Hidden;
+            Bradley = Visibility.Hidden;
 
         }
 
