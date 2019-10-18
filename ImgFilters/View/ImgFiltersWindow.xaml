@@ -299,7 +299,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -315,6 +315,66 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            
+            <TextBox x:Name="LeftTop"
+                 Grid.Row="3"
+                 Grid.Column="1"
+                 Text="{Binding Path=Kernel.LeftTop, Mode=TwoWay}"
+                 Background="White"/>
+            <TextBox x:Name="MidTop"
+                 Grid.Row="3"
+                 Grid.Column="2"
+                 Text="{Binding Path=Kernel.MidTop, Mode=TwoWay}"
+                 />
+            <TextBox x:Name="RightTop"
+                 Grid.Row="3"
+                 Grid.Column="3"
+                 Text="{Binding Path=Kernel.RightTop, Mode=TwoWay}"
+                 />
+            <TextBox x:Name="LeftMid"
+                 Grid.Row="4"
+                 Grid.Column="1"
+                 Text="{Binding Path=Kernel.LeftMid, Mode=TwoWay}"
+                 />
+            <TextBox x:Name="Mid"
+                 Grid.Row="4"
+                 Grid.Column="2"
+                 Text="{Binding Path=Kernel.Mid, Mode=TwoWay}"
+                 />
+            <TextBox x:Name="RightMid"
+                 Grid.Row="4"
+                 Grid.Column="3"
+                 Text="{Binding Path=Kernel.RightMid, Mode=TwoWay}"
+                 />
+            <TextBox x:Name="LeftBot"
+                 Grid.Row="5"
+                 Grid.Column="1"
+                 Text="{Binding Path=Kernel.LeftBot, Mode=TwoWay}"
+                 />
+            <TextBox x:Name="MidBot"
+                 Grid.Row="5"
+                 Grid.Column="2"
+                 Text="{Binding Path=Kernel.MidBot, Mode=TwoWay}"
+                 />
+            <TextBox x:Name="RightBot"
+                 Grid.Row="5"
+                 Grid.Column="3"
+                 Text="{Binding Path=Kernel.RightBot, Mode=TwoWay}"
+                 />
+            <Button x:Name="SaveKernelToFile"
+                      Command="{Binding Source={StaticResource vm}, Path=AfterPhotoCommand}"
+                      Margin="1"
+                      Grid.Column="1"
+                      Grid.Row="6"
+                      Grid.ColumnSpan="3"
+                      Content="Save Kernel" />
+            <Button x:Name="LoadKernelFromFile"
+                      Command="{Binding Source={StaticResource vm}, Path=AfterPhotoCommand}"
+                      Margin="1"
+                      Grid.Column="1"
+                      Grid.Row="2"
+                      Grid.ColumnSpan="3"
+                      Content="Load Kernel" />
             
 
         </Grid>

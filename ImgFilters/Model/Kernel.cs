@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImgFilters.Model
 {
+    [Serializable]
     public class Kernel
     {
         public float LeftTop { get; set; }

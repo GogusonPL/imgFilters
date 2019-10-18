@@ -68,6 +68,7 @@
     <Compile Include="ViewModel\Commands\SelectPhotoCommand.cs" />
     <Compile Include="ViewModel\Commands\SubValueCommand.cs" />
     <Compile Include="ViewModel\Commands\TestCommand.cs" />
+    <Compile Include="ViewModel\FileManager.cs" />
     <Compile Include="ViewModel\GaussFilter.cs" />
     <Compile Include="ViewModel\ImgManager.cs" />
     <Compile Include="ViewModel\ImgFiltersVM.cs" />

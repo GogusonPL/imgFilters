@@ -1,4 +1,5 @@
-﻿using ImgFilters.ViewModel.Commands;
+﻿using ImgFilters.Model;
+using ImgFilters.ViewModel.Commands;
 using Microsoft.Win32;
 using System;
 using System.ComponentModel;
@@ -213,11 +214,16 @@ namespace ImgFilters.ViewModel
 
         }
 
+        public Kernel Kernel { get; set; }
+
         public ImgFiltersVM()
         {
             InitializeCommands();
             InitializeDefaultParams();
             Bradley = Visibility.Hidden;
+            Gauss = Visibility.Visible;
+            Kernel = new Model.Kernel()
+            { LeftBot = 0.5f, LeftMid = 0.5f, LeftTop = 0.5f, Mid = 0.5f, MidBot = 0.5f, MidTop = 0.5f, RightBot = 0.5f, RightMid = 0.5f, RightTop = 0.5f };
 
         }
 
