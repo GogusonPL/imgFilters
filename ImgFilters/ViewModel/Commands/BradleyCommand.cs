@@ -29,7 +29,7 @@ namespace ImgFilters.ViewModel.Commands
 
             IsLocked = true;
             VM.GaussCommand.IsLocked = false;
-            //TODO: gaus visibility
+            VM.Gauss = Visibility.Hidden;
             VM.Bradley = Visibility.Visible;
             OnCanExecuteChanged();
             VM.GaussCommand.OnCanExecuteChanged();

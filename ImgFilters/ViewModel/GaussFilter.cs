@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImgFilters.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,52 +11,127 @@ namespace ImgFilters.ViewModel
     public static class GaussFilter
     {
 
-        public static BitmapSource CreateGauss(BitmapImage image, int precision, float adjustment, float rParam, float gParam, float bParam)
+        public static BitmapSource CreateGauss(BitmapImage image, Kernel kernel)
         {
             int height = image.PixelHeight,
                 width = image.PixelWidth;
 
-            int[,] integralImage = new int[height, width];
+            
 
             int stride = image.PixelWidth * 4;
             int size = image.PixelHeight * stride;
             byte[] outputImagePixels = new byte[size];
-
+            byte[] inputImagePixels = new byte[size];
             image.CopyPixels(outputImagePixels, stride, 0);
+            image.CopyPixels(inputImagePixels, stride, 0);
+
 
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
-                    var x1 = i - precision / 2;
-                    if (x1 <= 0) x1 = 1;
-                    var x2 = i + precision / 2;
-                    if (x2 >= height) x2 = height - 1;
-                    var y1 = j - precision / 2;
-                    if (y1 <= 0) y1 = 1;
-                    var y2 = j + precision / 2;
-                    if (y2 >= width) y2 = width - 1;
-
-                    int count = (x2 - x1) * (y2 - y1);
-
-                    int sum = integralImage[x2, y2] - integralImage[x2, y1 - 1] - integralImage[x1 - 1, y2] + integralImage[x1 - 1, y1 - 1];
-
-                    if ((GetGrayScale(stride, outputImagePixels, i, j, rParam, gParam, bParam) * count) <= (sum * (100 - adjustment) / 100))
+                    //byte red = pixels[index];
+                    //byte green = pixels[index + 1];
+                    //byte blue = pixels[index + 2];
+                    
+                    float leftTop, midTop, rightTop, leftMid, mid, rightMid, leftBot, midBot, rightBot;
+                    
+                    for (int rgbParam = 0; rgbParam < 3; rgbParam++)
                     {
-                        int index = i * stride + 4 * j;
+                        //Left Top
+                        if (j - 1 < 0 && i - 1 < 0)
+                        {
+                            leftTop = inputImagePixels[(i * stride + 4 * j) + rgbParam] * kernel.LeftTop;
 
-                        outputImagePixels[index] = 0;
-                        outputImagePixels[index + 1] = 0;
-                        outputImagePixels[index + 2] = 0;
-                    }
-                    else
-                    {
-                        int index = i * stride + 4 * j;
+                        }
+                        else
+                        {
+                            leftTop = inputImagePixels[((i - 1) * stride + 4 * (j - 1)) + rgbParam] * kernel.LeftTop;
+                        }
 
-                        outputImagePixels[index] = 255;
-                        outputImagePixels[index + 1] = 255;
-                        outputImagePixels[index + 2] = 255;
+                        //Mid Top
+                        if (j <= 0 && i - 1 < 0)
+                        {
+                            midTop = inputImagePixels[(i * stride + 4 * j) + rgbParam] * kernel.MidTop;
+
+                        }
+                        else
+                        {
+                            midTop = inputImagePixels[((i - 1) * stride + 4 * j) + rgbParam] * kernel.MidTop;
+                        }
+
+                        //Right Top j + 1 | i - 1
+                        if (i - 1 < 0)
+                        {
+                            rightTop = inputImagePixels[(i * stride + 4 * j )+ rgbParam] * kernel.RightTop;
+
+                        }
+                        else
+                        {
+                            rightTop = inputImagePixels[((i - 1) * stride + 4 * (j+1)) + rgbParam] * kernel.RightTop;
+                        }
+                        //Left Mid
+                        if (j - 1 < 0 && i <= 0)
+                        {
+                            leftMid = inputImagePixels[(i * stride + 4 * j )+ rgbParam] * kernel.LeftMid;
+
+                        }
+                        else
+                        {
+                            leftMid = inputImagePixels[(i * stride + 4 * (j - 1)) + rgbParam] * kernel.LeftMid;
+                        }
+                        //Mid
+                            mid = inputImagePixels[(i * stride + 4 * j )+ rgbParam] * kernel.Mid;
+                        //Right Mid
+                        if (i <= 0)
+                        {
+                            rightMid = inputImagePixels[(i * stride + 4 * j )+ rgbParam] * kernel.RightMid;
+
+                        }
+                        else
+                        {
+                            rightMid = inputImagePixels[(i * stride + 4 * (j + 1)) + rgbParam] * kernel.RightMid;
+                        }
+                        //Left Bot
+                        if (j - 1 < 0)
+                        {
+                            leftBot = inputImagePixels[(i * stride + 4 * j) + rgbParam] * kernel.LeftBot;
+
+                        }
+                        else
+                        {
+                            leftBot = inputImagePixels[((i+1) * stride + 4 * (j - 1)) + rgbParam] * kernel.LeftBot;
+                        }
+                        //Mid Bot
+                        if (j <= 0)
+                        {
+                            midBot = inputImagePixels[(i * stride + 4 * j) + rgbParam] * kernel.MidBot;
+
+                        }
+                        else
+                        {
+                            midBot = inputImagePixels[((i + 1) * stride + 4 * j) + rgbParam] * kernel.MidBot;
+                        }
+                        //Right Bot
+                        if (j + 1 < 0 && i + 1 < 0)
+                        {
+                            rightBot = inputImagePixels[(i * stride + 4 * j) + rgbParam] * kernel.RightBot;
+
+                        }
+                        else
+                        {
+                            rightBot = inputImagePixels[((i + 1) * stride + 4 * (j+1)) + rgbParam] * kernel.RightBot;
+                        }
+
+                        var tempResult = (leftTop + midTop + rightTop + leftMid + mid + rightMid + leftBot + midBot + rightBot) / 9;
+                        outputImagePixels[(i * stride + 4 * j) + rgbParam] = (byte)tempResult;
+
+
                     }
+                    
+
+                    
+                    
                 }
             }
 
@@ -70,19 +146,7 @@ namespace ImgFilters.ViewModel
                 outputImagePixels,
                 stride);
         }
-
-        private static int GetGrayScale(int stride, byte[] pixels, int pixel_height, int pixel_width, float rParam, float gParam, float bParam)
-        {
-            int index = pixel_height * stride + 4 * pixel_width;
-
-            byte red = pixels[index];
-            byte green = pixels[index + 1];
-            byte blue = pixels[index + 2];
-
-            //var grayScale = 0.3f * red + 0.6f * green + 0.11f * blue;
-            var grayScale = rParam * red + gParam * green + bParam * blue;
-            return (int)grayScale;
-        }
+        
     }
 }
 

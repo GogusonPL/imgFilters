@@ -25,6 +25,18 @@ namespace ImgFilters.ViewModel
             }
         }
 
+        private Visibility gauss;
+
+        public Visibility Gauss
+        {
+            get { return gauss; }
+            set
+            {
+                gauss = value;
+                OnPropertyChanged("Gauss");
+            }
+        }
+
 
         private BitmapImage originalPhoto;
 

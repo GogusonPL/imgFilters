@@ -288,6 +288,36 @@
                 CommandParameter="{Binding Path=AdjustmentParameter}"/>
 
         </Grid>
+        <Grid x:Name="Gauss" 
+              Grid.Column="3"
+              Grid.Row="1"
+              Grid.RowSpan="7"
+              Visibility="{Binding Path=Gauss,UpdateSourceTrigger=PropertyChanged}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+
+        </Grid>
         <Image x:Name="OriginalImage"
                Margin="5"
                Grid.Column="0"

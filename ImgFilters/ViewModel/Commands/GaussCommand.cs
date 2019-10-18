@@ -14,6 +14,7 @@ namespace ImgFilters.ViewModel.Commands
         {
             VM = vm;
             IsLocked = true;
+            VM.Gauss = Visibility.Visible;
         }
 
         public bool CanExecute(object parameter)
@@ -27,7 +28,7 @@ namespace ImgFilters.ViewModel.Commands
             IsLocked = true;
             VM.BradleyCommand.IsLocked = false;
             VM.Bradley = Visibility.Hidden;
-            //TODO: gaus visible
+            VM.Gauss = Visibility.Visible;
             OnCanExecuteChanged();
             VM.BradleyCommand.OnCanExecuteChanged();
             

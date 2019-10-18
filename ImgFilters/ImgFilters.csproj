@@ -55,10 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Kernel.cs" />
     <Compile Include="ViewModel\BradleyFilter.cs" />
     <Compile Include="ViewModel\Commands\AddValueCommand.cs" />
     <Compile Include="ViewModel\Commands\AfterPhotoCommand.cs" />
     <Compile Include="ViewModel\Commands\ApplyBradleyCommand.cs" />
+    <Compile Include="ViewModel\Commands\ApplyGaussCommand.cs" />
     <Compile Include="ViewModel\Commands\BradleyCommand.cs" />
     <Compile Include="ViewModel\Commands\GaussCommand.cs" />
     <Compile Include="ViewModel\Commands\OriginalPhotoCommand.cs" />
@@ -107,8 +109,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
