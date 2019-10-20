@@ -30,9 +30,6 @@ namespace ImgFilters.ViewModel
             {
                 for (int j = 0; j < width; j++)
                 {
-                    //byte red = pixels[index];
-                    //byte green = pixels[index + 1];
-                    //byte blue = pixels[index + 2];
                     
                     float leftTop, midTop, rightTop, leftMid, mid, rightMid, leftBot, midBot, rightBot;
                     
@@ -60,7 +57,7 @@ namespace ImgFilters.ViewModel
                             midTop = inputImagePixels[((i - 1) * stride + 4 * j) + rgbParam] * kernel.MidTop;
                         }
 
-                        //Right Top j + 1 | i - 1
+                        //Right Top 
                         if (i - 1 < 0 || j >= width - 1)
                         {
                             rightTop = inputImagePixels[(i * stride + 4 * j )+ rgbParam] * kernel.RightTop;

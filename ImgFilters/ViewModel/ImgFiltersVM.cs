@@ -114,7 +114,6 @@ namespace ImgFilters.ViewModel
         public GaussCommand GaussCommand { get; set; }
         public OriginalPhotoCommand OriginalPhotoCommand { get; set; }
         public SelectPhotoCommand SelectPhotoCommand { get; set; }
-        public ResetValueCommand ResetValueCommand { get; set; }
         public ApplyBradleyCommand ApplyBradleyCommand { get; set; }
         public LoadKernelCommand LoadKernelCommand { get; set; }
         public SaveKernelCommand SaveKernelCommand { get; set; }
@@ -156,7 +155,6 @@ namespace ImgFilters.ViewModel
             GaussCommand = new GaussCommand(this);
             OriginalPhotoCommand = new OriginalPhotoCommand(this);
             SelectPhotoCommand = new SelectPhotoCommand(this);
-            ResetValueCommand = new ResetValueCommand(this);
             ApplyBradleyCommand = new ApplyBradleyCommand(this);
             SavePhotoCommand = new SavePhotoCommand(this);
             LoadKernelCommand = new LoadKernelCommand(this);

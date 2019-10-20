@@ -67,7 +67,6 @@
     <Compile Include="ViewModel\Commands\LoadKernelCommand.cs" />
     <Compile Include="ViewModel\Commands\OriginalPhotoCommand.cs" />
     <Compile Include="ViewModel\Commands\RepeatGaussCommand.cs" />
-    <Compile Include="ViewModel\Commands\ResetValueCommand.cs" />
     <Compile Include="ViewModel\Commands\SaveBradleyParamsCommand.cs" />
     <Compile Include="ViewModel\Commands\SaveKernelCommand.cs" />
     <Compile Include="ViewModel\Commands\SavePhotoCommand.cs" />
