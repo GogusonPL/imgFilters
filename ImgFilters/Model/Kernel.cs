@@ -22,8 +22,10 @@ namespace ImgFilters.Model
             get { return leftTop; }
             set
             {
-                if(value >=0.1)
-                leftTop = value;
+                if (value >= 0 && value <= 1)
+                    leftTop = value;
+                else
+                    leftTop = 0;
                 OnPropertyChanged("LeftTop");
 
             }
@@ -37,7 +39,10 @@ namespace ImgFilters.Model
             get { return midTop; }
             set
             {
-                midTop = value;
+                if (value >= 0 && value <= 1)
+                    midTop = value;
+                else
+                    midTop = 0.2f;
                 OnPropertyChanged("MidTop");
             }
         }
@@ -49,7 +54,10 @@ namespace ImgFilters.Model
             get { return rightTop; }
             set
             {
-                rightTop = value;
+                if (value >= 0 && value <= 1)
+                    rightTop = value;
+                else
+                    rightTop = 0;
                 OnPropertyChanged("RightTop");
             }
         }
@@ -61,7 +69,10 @@ namespace ImgFilters.Model
             get { return leftMid; }
             set
             {
-                leftMid = value;
+                if (value >= 0 && value <= 1)
+                    leftMid = value;
+                else
+                    leftMid = 0.2f;
                 OnPropertyChanged("LeftMid");
             }
         }
@@ -73,7 +84,10 @@ namespace ImgFilters.Model
             get { return mid; }
             set
             {
-                mid = value;
+                if (value >= 0 && value <= 1)
+                    mid = value;
+                else
+                    mid = 0.2f;
                 OnPropertyChanged("Mid");
             }
         }
@@ -85,7 +99,10 @@ namespace ImgFilters.Model
             get { return rightMid; }
             set
             {
-                rightMid = value;
+                if (value >= 0 && value <= 1)
+                    rightMid = value;
+                else
+                    rightMid = 0.2f;
                 OnPropertyChanged("RightMid");
             }
         }
@@ -97,7 +114,10 @@ namespace ImgFilters.Model
             get { return leftBot; }
             set
             {
-                leftBot = value;
+                if (value >= 0 && value <= 1)
+                    leftBot = value;
+                else
+                    leftBot = 0;
                 OnPropertyChanged("LeftBot");
             }
         }
@@ -109,7 +129,10 @@ namespace ImgFilters.Model
             get { return midBot; }
             set
             {
-                midBot = value;
+                if (value >= 0 && value <= 1)
+                    midBot = value;
+                else
+                    midBot = 0.2f;
                 OnPropertyChanged("MidBot");
             }
         }
@@ -121,7 +144,10 @@ namespace ImgFilters.Model
             get { return rightBot; }
             set
             {
-                rightBot = value;
+                if (value >= 0 && value <= 1)
+                    rightBot = value;
+                else
+                    rightBot = 0;
                 OnPropertyChanged("RightBot");
             }
         }
