@@ -20,7 +20,20 @@ namespace ImgFilters.ViewModel
             return data;
         }
 
- 
+        public static BitmapImage ByteArrayToBitmapImage(byte[] array)
+        {
+            using (var ms = new System.IO.MemoryStream(array))
+            {
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.StreamSource = ms;
+                image.EndInit();
+                return image;
+            }
+        }
+
+
 
     }
 }

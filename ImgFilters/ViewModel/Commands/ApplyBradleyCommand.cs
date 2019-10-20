@@ -31,6 +31,7 @@ namespace ImgFilters.ViewModel.Commands
             VM.CurrentPhoto = VM.AfterPhoto;
             VM.OriginalPhotoCommand.IsLocked = false;
             VM.AfterPhotoCommand.IsLocked = true;
+            VM.SavePhotoCommand.OnCanExecuteChanged();
 
         }
     }

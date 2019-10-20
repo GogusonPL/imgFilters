@@ -58,7 +58,6 @@
     <Compile Include="Model\BradleyParams.cs" />
     <Compile Include="Model\Kernel.cs" />
     <Compile Include="ViewModel\BradleyFilter.cs" />
-    <Compile Include="ViewModel\Commands\AddValueCommand.cs" />
     <Compile Include="ViewModel\Commands\AfterPhotoCommand.cs" />
     <Compile Include="ViewModel\Commands\ApplyBradleyCommand.cs" />
     <Compile Include="ViewModel\Commands\ApplyGaussCommand.cs" />
@@ -71,9 +70,8 @@
     <Compile Include="ViewModel\Commands\ResetValueCommand.cs" />
     <Compile Include="ViewModel\Commands\SaveBradleyParamsCommand.cs" />
     <Compile Include="ViewModel\Commands\SaveKernelCommand.cs" />
+    <Compile Include="ViewModel\Commands\SavePhotoCommand.cs" />
     <Compile Include="ViewModel\Commands\SelectPhotoCommand.cs" />
-    <Compile Include="ViewModel\Commands\SubValueCommand.cs" />
-    <Compile Include="ViewModel\Commands\TestCommand.cs" />
     <Compile Include="ViewModel\FileManager.cs" />
     <Compile Include="ViewModel\GaussFilter.cs" />
     <Compile Include="ViewModel\ImgManager.cs" />

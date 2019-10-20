@@ -28,7 +28,7 @@ namespace ImgFilters.ViewModel.Commands
             VM.OriginalPhotoCommand.IsLocked = false;
             VM.AfterPhotoCommand.IsLocked = true;
             VM.RepeatGaussCommand.IsLocked = false;
-
+            VM.SavePhotoCommand.OnCanExecuteChanged();
 
 
         }

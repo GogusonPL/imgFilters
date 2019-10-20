@@ -318,12 +318,12 @@
                       Grid.Row="6"
                       Grid.ColumnSpan="1"
                       Content="After photo" />
-        <Button x:Name="TestImgButton"
-                      Command="{Binding Source={StaticResource vm}, Path=TestCommand}"
+        <Button x:Name="SaveImgButton"
+                      Command="{Binding Source={StaticResource vm}, Path=SavePhotoCommand}"
                       Margin="10"
                       Grid.Column="1"
                       Grid.Row="7"
                       Grid.ColumnSpan="1"
-                      Content="Test" />
+                      Content="Save photo" />
     </Grid>
 </Window>

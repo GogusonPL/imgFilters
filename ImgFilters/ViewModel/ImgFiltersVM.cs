@@ -114,17 +114,15 @@ namespace ImgFilters.ViewModel
         public GaussCommand GaussCommand { get; set; }
         public OriginalPhotoCommand OriginalPhotoCommand { get; set; }
         public SelectPhotoCommand SelectPhotoCommand { get; set; }
-        public AddValueCommand AddValueCommand { get; set; }
-        public SubValueCommand SubValueCommand { get; set; }
         public ResetValueCommand ResetValueCommand { get; set; }
         public ApplyBradleyCommand ApplyBradleyCommand { get; set; }
-        public TestCommand TestCommand { get; set; } // delete
         public LoadKernelCommand LoadKernelCommand { get; set; }
         public SaveKernelCommand SaveKernelCommand { get; set; }
         public RepeatGaussCommand RepeatGaussCommand { get; set; }
         public ApplyGaussCommand ApplyGaussCommand { get; set; }
         public SaveBradleyParamsCommand SaveBradleyParamsCommand { get; set; }
         public LoadBradleyParamsCommand LoadBradleyParamsCommand { get; set; }
+        public SavePhotoCommand SavePhotoCommand { get; set; }
         #endregion
 
         #region Constructor and inits
@@ -158,12 +156,9 @@ namespace ImgFilters.ViewModel
             GaussCommand = new GaussCommand(this);
             OriginalPhotoCommand = new OriginalPhotoCommand(this);
             SelectPhotoCommand = new SelectPhotoCommand(this);
-            AddValueCommand = new AddValueCommand(this);
-            SubValueCommand = new SubValueCommand(this);
             ResetValueCommand = new ResetValueCommand(this);
             ApplyBradleyCommand = new ApplyBradleyCommand(this);
-
-            TestCommand = new TestCommand(this);
+            SavePhotoCommand = new SavePhotoCommand(this);
             LoadKernelCommand = new LoadKernelCommand(this);
             SaveKernelCommand = new SaveKernelCommand(this);
             RepeatGaussCommand = new RepeatGaussCommand(this);
@@ -176,7 +171,9 @@ namespace ImgFilters.ViewModel
         public void SelectImage()
         {
             OpenFileDialog dialog_window = new OpenFileDialog();
-            dialog_window.Filter = "Image files (*.png; *.jpg;)|*.png;*.jpg;*.jpeg|All files(*.*)|*.*"; //TODO: Fix this
+            dialog_window.Filter = "Png Image (.png)|*.png";
+            dialog_window.FilterIndex = 0;
+            dialog_window.DefaultExt = "png";
             if (dialog_window.ShowDialog() == true)
             {
                 string filePath = dialog_window.FileName;
