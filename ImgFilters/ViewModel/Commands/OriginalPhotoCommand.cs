@@ -6,7 +6,16 @@ namespace ImgFilters.ViewModel.Commands
     public class OriginalPhotoCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        public bool IsLocked { get; set; }
+        private bool isLocked;
+
+        public bool IsLocked
+        {
+            get { return isLocked; }
+            set { isLocked = value;
+                OnCanExecuteChanged();
+            }
+        }
+
         public ImgFiltersVM VM { get; set; }
 
         public OriginalPhotoCommand(ImgFiltersVM vm)
@@ -25,9 +34,8 @@ namespace ImgFilters.ViewModel.Commands
         {
             VM.CurrentPhoto = ImgManager.BitmapSourceToByteArray(VM.OriginalPhoto);
             VM.OriginalPhotoCommand.IsLocked = true;
-            VM.OriginalPhotoCommand.OnCanExecuteChanged();
             VM.AfterPhotoCommand.IsLocked = false;
-            VM.AfterPhotoCommand.OnCanExecuteChanged();
+
             
         }
         public void OnCanExecuteChanged()

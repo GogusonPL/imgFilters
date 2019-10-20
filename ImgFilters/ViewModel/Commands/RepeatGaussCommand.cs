@@ -1,11 +1,14 @@
-﻿using ImgFilters.View;
-using System;
-using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace ImgFilters.ViewModel.Commands
 {
-    public class BradleyCommand : ICommand
+    public class RepeatGaussCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
         private bool isLocked;
@@ -19,31 +22,28 @@ namespace ImgFilters.ViewModel.Commands
             }
         }
         public ImgFiltersVM VM { get; set; }
-
-        public BradleyCommand(ImgFiltersVM vm)
+        public RepeatGaussCommand(ImgFiltersVM vm)
         {
             VM = vm;
-            IsLocked = false;
-            VM.Bradley = Visibility.Hidden;
         }
-
         public bool CanExecute(object parameter)
         {
-            if (IsLocked) return false;
-            else return true;
+            if (VM.AfterPhoto != null && VM.GaussCommand.IsLocked == true && IsLocked == false) return true;
+            else
+                return false;
+
         }
 
         public void Execute(object parameter)
         {
-            
-            IsLocked = true;
-            VM.GaussCommand.IsLocked = false;
-            VM.Gauss = Visibility.Hidden;
-            VM.Bradley = Visibility.Visible;
-
-            
+            VM.GaussBuff = GaussFilter.CreateGauss(VM.GaussBuff, VM.Kernel);
+            VM.AfterPhoto = ImgManager.BitmapSourceToByteArray(VM.GaussBuff);
+            VM.CurrentPhoto = VM.AfterPhoto;
+            VM.OriginalPhotoCommand.IsLocked = false;
+            VM.AfterPhotoCommand.IsLocked = true;
 
         }
+
         public void OnCanExecuteChanged()
         {
             if (CanExecuteChanged != null)

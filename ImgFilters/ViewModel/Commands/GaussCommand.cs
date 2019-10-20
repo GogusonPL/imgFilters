@@ -7,7 +7,16 @@ namespace ImgFilters.ViewModel.Commands
     public class GaussCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        public bool IsLocked { get; set; }
+        private bool isLocked;
+        public bool IsLocked
+        {
+            get { return isLocked; }
+            set
+            {
+                isLocked = value;
+                OnCanExecuteChanged();
+            }
+        }
         public ImgFiltersVM VM { get; set; }
 
         public GaussCommand(ImgFiltersVM vm)
@@ -25,12 +34,13 @@ namespace ImgFilters.ViewModel.Commands
 
         public void Execute(object parameter)
         {
+            
             IsLocked = true;
+            VM.RepeatGaussCommand.IsLocked = true;
             VM.BradleyCommand.IsLocked = false;
             VM.Bradley = Visibility.Hidden;
             VM.Gauss = Visibility.Visible;
-            OnCanExecuteChanged();
-            VM.BradleyCommand.OnCanExecuteChanged();
+            
             
         }
         public void OnCanExecuteChanged()

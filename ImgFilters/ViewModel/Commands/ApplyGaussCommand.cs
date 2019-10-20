@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace ImgFilters.ViewModel.Commands
 {
-    class ApplyGaussCommand : ICommand
+    public class ApplyGaussCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
         public ImgFiltersVM VM { get; set; }
@@ -22,13 +22,17 @@ namespace ImgFilters.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-
-            VM.AfterPhoto = ImgManager.BitmapSourceToByteArray(GaussFilter.CreateGauss(VM.OriginalPhoto, new Model.Kernel() { LeftBot = 0.5f, LeftMid = 0.5f, LeftTop = 0.5f, Mid = 0.5f, MidBot = 0.5f, MidTop = 0.5f, RightBot = 0.5f, RightMid = 0.5f, RightTop = 0.5f }));
+            VM.GaussBuff = GaussFilter.CreateGauss(VM.OriginalPhoto, VM.Kernel);
+            VM.AfterPhoto = ImgManager.BitmapSourceToByteArray(VM.GaussBuff);
             VM.CurrentPhoto = VM.AfterPhoto;
             VM.OriginalPhotoCommand.IsLocked = false;
             VM.OriginalPhotoCommand.OnCanExecuteChanged();
             VM.AfterPhotoCommand.IsLocked = true;
-            VM.AfterPhotoCommand.OnCanExecuteChanged(); ;
+            VM.AfterPhotoCommand.OnCanExecuteChanged();
+            VM.RepeatGaussCommand.IsLocked = false;
+            VM.RepeatGaussCommand.OnCanExecuteChanged(); // jak bedzie chwila poprawic wywolanie metody do settera w klasie
+
+
         }
     }
 }

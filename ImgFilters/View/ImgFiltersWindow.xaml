@@ -198,63 +198,16 @@
                 Grid.Row="0"
                 Grid.ColumnSpan="1"
                 Command="{Binding Source={StaticResource vm}, Path=SubValueCommand}"
-                CommandParameter="{Binding Path=RedParameter}"/>
-            <Button Content="-"
-                Grid.Column="3"
-                Grid.Row="1"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=SubValueCommand}"
-                CommandParameter="{Binding Path=GreenParameter}"/>
-            <Button Content="-"
-                Grid.Column="3"
-                Grid.Row="2"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=SubValueCommand}"
-                CommandParameter="{Binding Path=BlueParameter}"/>
-            <Button Content="-"
-                Grid.Column="3"
-                Grid.Row="3"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=SubValueCommand}"
-                CommandParameter="{Binding Path=PrecisionParameter}"/>
-            <Button Content="-"
-                Grid.Column="3"
-                Grid.Row="4"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=SubValueCommand}"
-                CommandParameter="{Binding Path=AdjustmentParameter}"
                 />
+            
 
             <Button Content="+"
                 Grid.Column="4"
                 Grid.Row="0"
                 Grid.ColumnSpan="1"
                 Command="{Binding Source={StaticResource vm}, Path=AddValueCommand}"
-                CommandParameter="{Binding Path=RedParameter}"/>
-            <Button Content="+"
-                Grid.Column="4"
-                Grid.Row="1"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=AddValueCommand}"
-                CommandParameter="{Binding Path=GreenParameter}"/>
-            <Button Content="+"
-                Grid.Column="4"
-                Grid.Row="2"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=AddValueCommand}"
-                CommandParameter="{Binding Path=BlueParameter}"/>
-            <Button Content="+"
-                Grid.Column="4"
-                Grid.Row="3"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=AddValueCommand}"
-                CommandParameter="{Binding Path=PrecisionParameter}"/>
-            <Button Content="+"
-                Grid.Column="4"
-                Grid.Row="4"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=AddValueCommand}"
-                CommandParameter="{Binding Path=AdjustmentParameter}"/>
+                />
+            
 
             <Button Content="Reset"
                 Grid.Column="5"
@@ -262,30 +215,7 @@
                 Grid.ColumnSpan="1"
                 Command="{Binding Source={StaticResource vm}, Path=ResetValueCommand}"
                 CommandParameter="{Binding Path=RedParameter}"/>
-            <Button Content="Reset"
-                Grid.Column="5"
-                Grid.Row="1"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=ResetValueCommand}"
-                CommandParameter="{Binding Path=GreenParameter}"/>
-            <Button Content="Reset"
-                Grid.Column="5"
-                Grid.Row="2"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=ResetValueCommand}"
-                CommandParameter="{Binding Path=BlueParameter}"/>
-            <Button Content="Reset"
-                Grid.Column="5"
-                Grid.Row="3"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=ResetValueCommand}"
-                CommandParameter="{Binding Path=PrecisionParameter}"/>
-            <Button Content="Reset"
-                Grid.Column="5"
-                Grid.Row="4"
-                Grid.ColumnSpan="1"
-                Command="{Binding Source={StaticResource vm}, Path=ResetValueCommand}"
-                CommandParameter="{Binding Path=AdjustmentParameter}"/>
+            
 
         </Grid>
         <Grid x:Name="Gauss" 
@@ -362,19 +292,33 @@
                  Text="{Binding Path=Kernel.RightBot, Mode=TwoWay}"
                  />
             <Button x:Name="SaveKernelToFile"
-                      Command="{Binding Source={StaticResource vm}, Path=AfterPhotoCommand}"
+                      Command="{Binding Source={StaticResource vm}, Path=SaveKernelCommand}"
                       Margin="1"
                       Grid.Column="1"
                       Grid.Row="6"
                       Grid.ColumnSpan="3"
                       Content="Save Kernel" />
             <Button x:Name="LoadKernelFromFile"
-                      Command="{Binding Source={StaticResource vm}, Path=AfterPhotoCommand}"
+                      Command="{Binding Source={StaticResource vm}, Path=LoadKernelCommand}"
                       Margin="1"
                       Grid.Column="1"
                       Grid.Row="2"
                       Grid.ColumnSpan="3"
                       Content="Load Kernel" />
+            <Button x:Name="ApplyGauss"
+                      Command="{Binding Source={StaticResource vm}, Path=ApplyGaussCommand}"
+                      Margin="1"
+                      Grid.Column="0"
+                      Grid.Row="11"
+                      Grid.ColumnSpan="5"
+                      Content="Apply gauss" />
+            <Button x:Name="Repeat"
+                      Command="{Binding Source={StaticResource vm}, Path=RepeatGaussCommand}"
+                      Margin="1"
+                      Grid.Column="0"
+                      Grid.Row="10"
+                      Grid.ColumnSpan="5"
+                      Content="Repeat" />
             
 
         </Grid>

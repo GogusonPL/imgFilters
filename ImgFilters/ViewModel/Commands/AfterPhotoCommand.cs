@@ -6,7 +6,18 @@ namespace ImgFilters.ViewModel.Commands
     public class AfterPhotoCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        public bool IsLocked { get; set; }
+        private bool isLocked;
+
+        public bool IsLocked
+        {
+            get { return isLocked; }
+            set
+            {
+                isLocked = value;
+                OnCanExecuteChanged();
+            }
+        }
+
         public ImgFiltersVM VM { get; set; }
 
         public AfterPhotoCommand(ImgFiltersVM vm)
@@ -25,9 +36,8 @@ namespace ImgFilters.ViewModel.Commands
         {
             VM.CurrentPhoto = VM.AfterPhoto;
             VM.AfterPhotoCommand.IsLocked = true;
-            VM.AfterPhotoCommand.OnCanExecuteChanged();
             VM.OriginalPhotoCommand.IsLocked = false;
-            VM.OriginalPhotoCommand.OnCanExecuteChanged();
+
         }
 
         public void OnCanExecuteChanged()

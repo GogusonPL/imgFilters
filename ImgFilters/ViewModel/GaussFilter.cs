@@ -11,7 +11,7 @@ namespace ImgFilters.ViewModel
     public static class GaussFilter
     {
 
-        public static BitmapSource CreateGauss(BitmapImage image, Kernel kernel)
+        public static BitmapSource CreateGauss(BitmapSource image, Kernel kernel)
         {
             int height = image.PixelHeight,
                 width = image.PixelWidth;
@@ -39,7 +39,7 @@ namespace ImgFilters.ViewModel
                     for (int rgbParam = 0; rgbParam < 3; rgbParam++)
                     {
                         //Left Top
-                        if (j - 1 < 0 && i - 1 < 0)
+                        if (j - 1 < 0 || i - 1 < 0 || i - 1 < 0)
                         {
                             leftTop = inputImagePixels[(i * stride + 4 * j) + rgbParam] * kernel.LeftTop;
 
@@ -50,7 +50,7 @@ namespace ImgFilters.ViewModel
                         }
 
                         //Mid Top
-                        if (j <= 0 && i - 1 < 0)
+                        if (i - 1 < 0)
                         {
                             midTop = inputImagePixels[(i * stride + 4 * j) + rgbParam] * kernel.MidTop;
 
@@ -61,7 +61,7 @@ namespace ImgFilters.ViewModel
                         }
 
                         //Right Top j + 1 | i - 1
-                        if (i - 1 < 0)
+                        if (i - 1 < 0 || j >= width - 1)
                         {
                             rightTop = inputImagePixels[(i * stride + 4 * j )+ rgbParam] * kernel.RightTop;
 
@@ -71,7 +71,7 @@ namespace ImgFilters.ViewModel
                             rightTop = inputImagePixels[((i - 1) * stride + 4 * (j+1)) + rgbParam] * kernel.RightTop;
                         }
                         //Left Mid
-                        if (j - 1 < 0 && i <= 0)
+                        if (j - 1 < 0)
                         {
                             leftMid = inputImagePixels[(i * stride + 4 * j )+ rgbParam] * kernel.LeftMid;
 
@@ -83,7 +83,7 @@ namespace ImgFilters.ViewModel
                         //Mid
                             mid = inputImagePixels[(i * stride + 4 * j )+ rgbParam] * kernel.Mid;
                         //Right Mid
-                        if (i <= 0)
+                        if (j >= width - 1)
                         {
                             rightMid = inputImagePixels[(i * stride + 4 * j )+ rgbParam] * kernel.RightMid;
 
@@ -93,7 +93,7 @@ namespace ImgFilters.ViewModel
                             rightMid = inputImagePixels[(i * stride + 4 * (j + 1)) + rgbParam] * kernel.RightMid;
                         }
                         //Left Bot
-                        if (j - 1 < 0)
+                        if (j - 1 < 0 || i >= height - 1)
                         {
                             leftBot = inputImagePixels[(i * stride + 4 * j) + rgbParam] * kernel.LeftBot;
 
@@ -103,7 +103,7 @@ namespace ImgFilters.ViewModel
                             leftBot = inputImagePixels[((i+1) * stride + 4 * (j - 1)) + rgbParam] * kernel.LeftBot;
                         }
                         //Mid Bot
-                        if (j <= 0)
+                        if (i >= height - 1)
                         {
                             midBot = inputImagePixels[(i * stride + 4 * j) + rgbParam] * kernel.MidBot;
 
@@ -113,7 +113,7 @@ namespace ImgFilters.ViewModel
                             midBot = inputImagePixels[((i + 1) * stride + 4 * j) + rgbParam] * kernel.MidBot;
                         }
                         //Right Bot
-                        if (j + 1 < 0 && i + 1 < 0)
+                        if (i >= height - 1 || j >= width - 1)
                         {
                             rightBot = inputImagePixels[(i * stride + 4 * j) + rgbParam] * kernel.RightBot;
 
@@ -123,7 +123,7 @@ namespace ImgFilters.ViewModel
                             rightBot = inputImagePixels[((i + 1) * stride + 4 * (j+1)) + rgbParam] * kernel.RightBot;
                         }
 
-                        var tempResult = (leftTop + midTop + rightTop + leftMid + mid + rightMid + leftBot + midBot + rightBot) / 9;
+                        var tempResult = (leftTop + midTop + rightTop + leftMid + mid + rightMid + leftBot + midBot + rightBot) / kernel.KernelSum;
                         outputImagePixels[(i * stride + 4 * j) + rgbParam] = (byte)tempResult;
 
 

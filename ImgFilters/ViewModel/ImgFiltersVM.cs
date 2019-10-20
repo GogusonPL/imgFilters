@@ -76,6 +76,8 @@ namespace ImgFilters.ViewModel
             }
         }
 
+        public BitmapSource GaussBuff { get; set; }
+
         public AfterPhotoCommand AfterPhotoCommand { get; set; }
         public BradleyCommand BradleyCommand { get; set; }
         public GaussCommand GaussCommand { get; set; }
@@ -85,7 +87,11 @@ namespace ImgFilters.ViewModel
         public SubValueCommand SubValueCommand { get; set; }
         public ResetValueCommand ResetValueCommand { get; set; }
         public ApplyBradleyCommand ApplyBradleyCommand { get; set; }
-        public TestCommand TestCommand { get; set; }
+        public TestCommand TestCommand { get; set; } // delete
+        public LoadKernelCommand LoadKernelCommand { get; set; }
+        public SaveKernelCommand SaveKernelCommand { get; set; }
+        public RepeatGaussCommand RepeatGaussCommand { get; set; }
+        public ApplyGaussCommand ApplyGaussCommand { get; set; }
 
         // Bradley filter params
         private float redParameter;
@@ -223,7 +229,7 @@ namespace ImgFilters.ViewModel
             Bradley = Visibility.Hidden;
             Gauss = Visibility.Visible;
             Kernel = new Model.Kernel()
-            { LeftBot = 0.5f, LeftMid = 0.5f, LeftTop = 0.5f, Mid = 0.5f, MidBot = 0.5f, MidTop = 0.5f, RightBot = 0.5f, RightMid = 0.5f, RightTop = 0.5f };
+            { LeftBot = 0, LeftMid = 0.2f, LeftTop = 0, Mid = 0.2f, MidBot = 0.2f, MidTop = 0.2f, RightBot = 0, RightMid = 0.2f, RightTop = 0};
 
         }
 
@@ -247,7 +253,13 @@ namespace ImgFilters.ViewModel
             SubValueCommand = new SubValueCommand(this);
             ResetValueCommand = new ResetValueCommand(this);
             ApplyBradleyCommand = new ApplyBradleyCommand(this);
+
             TestCommand = new TestCommand(this);
+            LoadKernelCommand = new LoadKernelCommand(this);
+            SaveKernelCommand = new SaveKernelCommand(this);
+            RepeatGaussCommand = new RepeatGaussCommand(this);
+            ApplyGaussCommand = new ApplyGaussCommand(this);
+
 
         }
 

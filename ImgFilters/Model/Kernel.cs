@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,18 +8,133 @@ using System.Threading.Tasks;
 namespace ImgFilters.Model
 {
     [Serializable]
-    public class Kernel
+    public class Kernel : INotifyPropertyChanged
     {
-        public float LeftTop { get; set; }
-        public float MidTop { get; set; }
-        public float RightTop { get; set; }
-        public float LeftMid { get; set; }
-        public float Mid { get; set; }
-        public float RightMid { get; set; }
-        public float LeftBot { get; set; }
-        public float MidBot { get; set; }
-        public float RightBot { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private float leftTop;
 
+        public float LeftTop
+        {
+            get { return leftTop; }
+            set
+            {
+
+                leftTop = value;
+                OnPropertyChanged("LeftTop");
+
+            }
+        }
+
+
+        private float midTop;
+
+        public float MidTop
+        {
+            get { return midTop; }
+            set
+            {
+                midTop = value;
+                OnPropertyChanged("MidTop");
+            }
+        }
+
+        private float rightTop;
+
+        public float RightTop
+        {
+            get { return rightTop; }
+            set
+            {
+                rightTop = value;
+                OnPropertyChanged("RightTop");
+            }
+        }
+
+        private float leftMid;
+
+        public float LeftMid
+        {
+            get { return leftMid; }
+            set
+            {
+                leftMid = value;
+                OnPropertyChanged("LeftMid");
+            }
+        }
+
+        private float mid;
+
+        public float Mid
+        {
+            get { return mid; }
+            set
+            {
+                mid = value;
+                OnPropertyChanged("Mid");
+            }
+        }
+
+        private float rightMid;
+
+        public float RightMid
+        {
+            get { return rightMid; }
+            set
+            {
+                rightMid = value;
+                OnPropertyChanged("RightMid");
+            }
+        }
+
+        private float leftBot;
+
+        public float LeftBot
+        {
+            get { return leftBot; }
+            set
+            {
+                leftBot = value;
+                OnPropertyChanged("LeftBot");
+            }
+        }
+
+        private float midBot;
+
+        public float MidBot
+        {
+            get { return midBot; }
+            set
+            {
+                midBot = value;
+                OnPropertyChanged("MidBot");
+            }
+        }
+
+        private float rightBot;
+
+        public float RightBot
+        {
+            get { return rightBot; }
+            set
+            {
+                rightBot = value;
+                OnPropertyChanged("RightBot");
+            }
+        }
+
+        public float KernelSum
+        {
+            get { return LeftTop + LeftMid + LeftBot + RightTop + RightMid + RightBot + MidTop + Mid + MidBot; }
+
+        }
+
+        private void OnPropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
 
     }
 }
