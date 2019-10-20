@@ -26,11 +26,9 @@ namespace ImgFilters.ViewModel.Commands
             VM.AfterPhoto = ImgManager.BitmapSourceToByteArray(VM.GaussBuff);
             VM.CurrentPhoto = VM.AfterPhoto;
             VM.OriginalPhotoCommand.IsLocked = false;
-            VM.OriginalPhotoCommand.OnCanExecuteChanged();
             VM.AfterPhotoCommand.IsLocked = true;
-            VM.AfterPhotoCommand.OnCanExecuteChanged();
             VM.RepeatGaussCommand.IsLocked = false;
-            VM.RepeatGaussCommand.OnCanExecuteChanged(); // jak bedzie chwila poprawic wywolanie metody do settera w klasie
+
 
 
         }

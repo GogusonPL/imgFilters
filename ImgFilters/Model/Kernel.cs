@@ -7,18 +7,22 @@ using System.Threading.Tasks;
 
 namespace ImgFilters.Model
 {
-    [Serializable]
+    
     public class Kernel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private float leftTop;
 
+        private float leftTop;
+        public Kernel()
+        {
+
+        }
         public float LeftTop
         {
             get { return leftTop; }
             set
             {
-
+                if(value >=0.1)
                 leftTop = value;
                 OnPropertyChanged("LeftTop");
 

@@ -8,13 +8,11 @@ using System.Windows.Input;
 
 namespace ImgFilters.ViewModel.Commands
 {
-    public class SaveKernelCommand : ICommand
+    public class SaveBradleyParamsCommand : ICommand
     {
-        
         public event EventHandler CanExecuteChanged;
-
         public ImgFiltersVM VM { get; set; }
-        public SaveKernelCommand(ImgFiltersVM vm)
+        public SaveBradleyParamsCommand(ImgFiltersVM vm)
         {
             VM = vm;
         }
@@ -22,6 +20,7 @@ namespace ImgFilters.ViewModel.Commands
         {
             return true;
         }
+
         public void Execute(object parameter)
         {
             SaveFileDialog dialog_window = new SaveFileDialog();
@@ -31,10 +30,9 @@ namespace ImgFilters.ViewModel.Commands
             if (dialog_window.ShowDialog() == true)
             {
                 string filePath = dialog_window.FileName;
-                FileManager.WriteToXmlFile(filePath, VM.Kernel);
-                
+                FileManager.WriteToXmlFile(filePath, VM.BradleyParams);
+
             }
-                
         }
     }
 }

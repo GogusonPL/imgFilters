@@ -11,16 +11,14 @@ using System.Windows.Input;
 
 namespace ImgFilters.ViewModel.Commands
 {
-    public class LoadKernelCommand : ICommand
+    public class LoadBradleyParamsCommand : ICommand
     {
-        //TODO: add in vm
         public event EventHandler CanExecuteChanged;
         public ImgFiltersVM VM { get; set; }
-        public LoadKernelCommand(ImgFiltersVM vm)
+        public LoadBradleyParamsCommand(ImgFiltersVM vm)
         {
             VM = vm;
         }
-
         public bool CanExecute(object parameter)
         {
             return true;
@@ -28,7 +26,6 @@ namespace ImgFilters.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-
             OpenFileDialog dialog_window = new OpenFileDialog();
             dialog_window.Filter = "XML Files (*.xml)|*.xml";
             dialog_window.FilterIndex = 0;
@@ -42,11 +39,12 @@ namespace ImgFilters.ViewModel.Commands
                 }
                 else
                 {
-                    var temp = FileManager.ReadFromXmlFile<Kernel>(dialog_window.FileName);
-                    if (temp.GetType() == typeof(Kernel))
+                    var temp = FileManager.ReadFromXmlFile<BradleyParams>(dialog_window.FileName);
+                    if (temp.GetType() == typeof(BradleyParams))
                     {
-                        VM.Kernel = temp;
+                        VM.BradleyParams = temp;
                     }
+                    
                 }
 
 

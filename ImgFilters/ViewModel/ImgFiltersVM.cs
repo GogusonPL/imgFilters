@@ -15,13 +15,15 @@ namespace ImgFilters.ViewModel
 
 
 
-
+        #region Properties
         private Visibility bradley;
 
         public Visibility Bradley
         {
             get { return bradley; }
-            set { bradley = value;
+            set
+            {
+                bradley = value;
                 OnPropertyChanged("Bradley");
             }
         }
@@ -77,7 +79,36 @@ namespace ImgFilters.ViewModel
         }
 
         public BitmapSource GaussBuff { get; set; }
+        private Kernel kernel;
 
+        public Kernel Kernel
+        {
+            get { return kernel; }
+            set
+            {
+                kernel = value;
+                OnPropertyChanged("Kernel");
+            }
+        }
+
+        private BradleyParams bradleyParams;
+
+        public BradleyParams BradleyParams
+        {
+            get { return bradleyParams; }
+            set
+            {
+
+                bradleyParams = value;
+                OnPropertyChanged("BradleyParams");
+
+            }
+        }
+
+        #endregion
+
+
+        #region Commands  
         public AfterPhotoCommand AfterPhotoCommand { get; set; }
         public BradleyCommand BradleyCommand { get; set; }
         public GaussCommand GaussCommand { get; set; }
@@ -92,154 +123,32 @@ namespace ImgFilters.ViewModel
         public SaveKernelCommand SaveKernelCommand { get; set; }
         public RepeatGaussCommand RepeatGaussCommand { get; set; }
         public ApplyGaussCommand ApplyGaussCommand { get; set; }
+        public SaveBradleyParamsCommand SaveBradleyParamsCommand { get; set; }
+        public LoadBradleyParamsCommand LoadBradleyParamsCommand { get; set; }
+        #endregion
 
-        // Bradley filter params
-        private float redParameter;
-
-        public float RedParameter
-        {
-            get { return redParameter; }
-            set {
-
-                if (value >= 0.1 && value <= 1)
-                {
-                    redParameter = value;
-                    OnPropertyChanged("RedParameter");
-                }
-                else
-                {
-                    redParameter = RedParameter_Default;
-                    OnPropertyChanged("RedParameter");
-                }
-
-            }
-        }
-
-        public float RedParameter_Default
-        {
-            get { return 0.3f; }
-           
-        }
-        private float greenParameter;
-
-        public float GreenParameter
-        {
-            get { return greenParameter; }
-            set {
-                if (value >= 0.1 && value <= 1)
-                {
-                    greenParameter = value;
-                    OnPropertyChanged("GreenParameter");
-                }
-                else
-                {
-                    greenParameter = GreenParameter_Default;
-                    OnPropertyChanged("GreenParameter");
-                }
-            }
-        }
-
-        public float GreenParameter_Default
-        {
-            get { return 0.6f; }
-
-        }
-        private float blueParameter;
-
-        public float BlueParameter
-        {
-            get { return blueParameter; }
-            set
-            {
-                if (value >= 0.1 && value <= 1)
-                {
-                    blueParameter = value;
-                    OnPropertyChanged("BlueParameter");
-                }
-                else
-                {
-                    blueParameter = BlueParameter_Default;
-                    OnPropertyChanged("BlueParameter");
-                }
-            }
-        }
-
-        public float BlueParameter_Default
-        {
-            get { return 0.11f; }
-
-        }
-        private int precisionParameter;
-
-        public int PrecisionParameter
-        {
-            get { return precisionParameter; }
-            set
-            {
-                if (value >= 1 && value <= 8)
-                {
-                    precisionParameter = value;
-                    OnPropertyChanged("PrecisionParameter");
-                }
-                else
-                {
-                    precisionParameter = PrecisionParameter_Default;
-                    OnPropertyChanged("PrecisionParameter");
-                }
-            }
-        }
-
-        public int PrecisionParameter_Default
-        {
-            get { return 6; }
-
-        }
-        private float adjustmentParameter;
-
-        public float AdjustmentParameter
-        {
-            get { return adjustmentParameter; }
-            set
-            {
-                if (value >= 0.1 && value <= 1)
-                {
-                    adjustmentParameter = value;
-                    OnPropertyChanged("AdjustmentParameter");
-                }
-                else
-                {
-                    adjustmentParameter = AdjustmentParameter_Default;
-                    OnPropertyChanged("AdjustmentParameter");
-                }
-            }
-        }
-
-        public float AdjustmentParameter_Default
-        {
-            get { return 0.15f; }
-
-        }
-
-        public Kernel Kernel { get; set; }
-
+        #region Constructor and inits
         public ImgFiltersVM()
         {
             InitializeCommands();
             InitializeDefaultParams();
-            Bradley = Visibility.Hidden;
-            Gauss = Visibility.Visible;
-            Kernel = new Model.Kernel()
-            { LeftBot = 0, LeftMid = 0.2f, LeftTop = 0, Mid = 0.2f, MidBot = 0.2f, MidTop = 0.2f, RightBot = 0, RightMid = 0.2f, RightTop = 0};
 
         }
 
         private void InitializeDefaultParams()
         {
-            RedParameter = RedParameter_Default;
-            GreenParameter = GreenParameter_Default;
-            BlueParameter = BlueParameter_Default;
-            PrecisionParameter = PrecisionParameter_Default;
-            AdjustmentParameter = AdjustmentParameter_Default;
+
+            BradleyParams = new BradleyParams();
+            Bradley = Visibility.Hidden;
+            Gauss = Visibility.Visible;
+            Kernel = new Model.Kernel()
+            { LeftBot = 0, LeftMid = 0.2f, LeftTop = 0, Mid = 0.2f, MidBot = 0.2f, MidTop = 0.2f, RightBot = 0, RightMid = 0.2f, RightTop = 0 };
+            BradleyParams.RedParameter = BradleyParams.RedParameter_Default;
+            BradleyParams.GreenParameter = BradleyParams.GreenParameter_Default;
+            BradleyParams.BlueParameter = BradleyParams.BlueParameter_Default;
+            BradleyParams.PrecisionParameter = BradleyParams.PrecisionParameter_Default;
+            BradleyParams.AdjustmentParameter = BradleyParams.AdjustmentParameter_Default;
+
         }
 
         private void InitializeCommands()
@@ -259,10 +168,11 @@ namespace ImgFilters.ViewModel
             SaveKernelCommand = new SaveKernelCommand(this);
             RepeatGaussCommand = new RepeatGaussCommand(this);
             ApplyGaussCommand = new ApplyGaussCommand(this);
-
+            SaveBradleyParamsCommand = new SaveBradleyParamsCommand(this);
+            LoadBradleyParamsCommand = new LoadBradleyParamsCommand(this);
 
         }
-
+        #endregion
         public void SelectImage()
         {
             OpenFileDialog dialog_window = new OpenFileDialog();

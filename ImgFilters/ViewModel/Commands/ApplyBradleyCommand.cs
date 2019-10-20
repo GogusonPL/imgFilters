@@ -24,15 +24,13 @@ namespace ImgFilters.ViewModel.Commands
         public void Execute(object parameter)
         {
             VM.AfterPhoto = ImgManager.BitmapSourceToByteArray(BradleyFilter.CreateBradley(VM.OriginalPhoto,
-                                                                                     VM.OriginalPhoto.PixelWidth / VM.PrecisionParameter,
-                                                                                     VM.AdjustmentParameter,
-                                                                                     VM.RedParameter, VM.GreenParameter,
-                                                                                     VM.BlueParameter));
+                                                                                     VM.OriginalPhoto.PixelWidth / VM.BradleyParams.PrecisionParameter,
+                                                                                     VM.BradleyParams.AdjustmentParameter,
+                                                                                     VM.BradleyParams.RedParameter, VM.BradleyParams.GreenParameter,
+                                                                                     VM.BradleyParams.BlueParameter));
             VM.CurrentPhoto = VM.AfterPhoto;
             VM.OriginalPhotoCommand.IsLocked = false;
-            VM.OriginalPhotoCommand.OnCanExecuteChanged();
             VM.AfterPhotoCommand.IsLocked = true;
-            VM.AfterPhotoCommand.OnCanExecuteChanged();
 
         }
     }
